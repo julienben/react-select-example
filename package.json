@@ -1,0 +1,50 @@
+{
+  "name": "react-select-example",
+  "version": "0.1.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/julienben/react-select-example.git"
+  },
+  "engines": {
+    "npm": ">=5",
+    "node": ">=8.10"
+  },
+  "author": "Julien Benchetrit",
+  "license": "MIT",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "build-storybook": "build-storybook -p 9001 -c .storybook",
+    "deploy-storybook": "storybook-to-ghpages"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "dependencies": {
+    "classnames": "2.2.6",
+    "prop-types": "15.6.2",
+    "react": "16.5.2",
+    "react-dom": "16.5.2",
+    "react-scripts": "2.0.4"
+  },
+  "devDependencies": {
+    "@storybook/react": "^4.0.0-alpha.24",
+    "@storybook/storybook-deployer": "2.3.0",
+    "babel-loader": "8.0.4",
+    "node-sass": "4.9.3",
+    "postcss-ie11-pseudo-class": "0.1.2",
+    "postcss-import": "12.0.0",
+    "postcss-preset-env": "6.0.10",
+    "precss": "3.1.2"
+  }
+}
