@@ -12,9 +12,8 @@ import { debounce } from '../../utils/debounce';
 import Option from './Option';
 import style from './Select.module.scss';
 
-/* eslint-disable react/sort-comp */
 class Select extends React.Component {
-  maxHeight = 350;
+  maxHeight = 250;
 
   state = {
     open: false,
@@ -199,7 +198,6 @@ class Select extends React.Component {
 
   stopPropagation = e => e.stopPropagation();
 
-  /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */
   render() {
     const {
       width,

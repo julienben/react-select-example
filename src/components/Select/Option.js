@@ -17,7 +17,6 @@ class Option extends React.Component {
       [style.highlightedOption]: this.props.highlightedOption,
       [style.selectedOption]: this.props.selectedOption,
     });
-    /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-noninteractive-element-interactions */
     return (
       <li className={classes} onMouseEnter={this.onMouseEnter} onClick={this.onClick}>
         {this.props.children ? this.props.children : this.props.name}
