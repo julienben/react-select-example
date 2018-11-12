@@ -3,19 +3,19 @@ import './App.scss';
 import Select from './components/Select';
 
 const options = [
-  { name: 'January', value: 'January' },
-  { name: 'February', value: 'February' },
-  { name: 'March', value: 'March' },
-  { name: 'April', value: 'April' },
-  { name: 'May', value: 'May' },
-  { name: 'June', value: 'June' },
-  { name: 'July', value: 'July' },
-  { name: 'August', value: 'August' },
-  { name: 'September', value: 'September' },
-  { name: 'October', value: 'October' },
-  { name: 'November', value: 'November' },
-  { name: 'December', value: 'December' },
-];
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+].map(m => ({ name: m, value: m }))
 
 class App extends React.Component {
   state = { value: 'January' }
@@ -29,7 +29,7 @@ class App extends React.Component {
       <div className="App">
         <Select
           name="testSelect"
-          labelText="Select a month"
+          labelText="Pick a month"
           value={this.state.value}
           options={options}
           onChange={this.onChange}
