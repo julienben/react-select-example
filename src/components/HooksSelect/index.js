@@ -76,6 +76,10 @@ function Select(props) {
     })
   };
 
+  const onScroll = (e) => {
+    if (!listRef.current.isSameNode(e.target)) setAbsoluteStyleCoordinates();
+  }
+
   // const efficientSetAbsoluteStyleCoordinates = debounce(setAbsoluteStyleCoordinates, 10);
 
   const scrollIntoView = index => {
@@ -100,10 +104,6 @@ function Select(props) {
     if (state.open) hideOptions();
     else showOptions();
   };
-
-  // Timeout ensures that the select isnt reopened by toggleOptions (given two handlers on same event)
-  const onClickOutsideSelectBox = () =>
-    setTimeout(hideOptions, 0);
 
   const switchHighlightedOption = i =>
     dispatch({ type: 'SET_HIGHLIGHTED_INDEX', highlightedIndex: i });
@@ -183,14 +183,14 @@ function Select(props) {
   const stopPropagation = e => e.stopPropagation();
 
   const addEventListeners = () => {
-    window.addEventListener('click', onClickOutsideSelectBox, true);
-    window.addEventListener('scroll', setAbsoluteStyleCoordinates, true);
+    window.addEventListener('click', hideOptions, true);
+    window.addEventListener('scroll', onScroll, true);
     window.addEventListener('resize', setAbsoluteStyleCoordinates, true);
   };
 
   const removeEventListeners = () => {
-    window.removeEventListener('click', onClickOutsideSelectBox, true);
-    window.removeEventListener('scroll', setAbsoluteStyleCoordinates, true);
+    window.removeEventListener('click', hideOptions, true);
+    window.removeEventListener('scroll', onScroll, true);
     window.removeEventListener('resize', setAbsoluteStyleCoordinates, true);
   };
 
