@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
-import Select from './components/Select';
+// import Select from './components/Select';
+import Select from './components/HooksSelect';
 
 const options = [
   'January',
