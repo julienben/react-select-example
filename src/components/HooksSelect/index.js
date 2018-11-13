@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-// import { debounce } from '../../utils/debounce';
+import { debounce } from '../../utils/debounce';
 
 import Option from './Option';
 import style from '../Select/Select.module.scss';
@@ -45,6 +45,12 @@ function Select(props) {
   const containerRef = React.useRef();
   const listRef = React.useRef();
 
+  const efficientSetAbsoluteStyleCoordinates = React.useRef();
+  React.useEffect(() => {
+    // TODO: Let's use rAF, not debounce. Or throttle.
+    efficientSetAbsoluteStyleCoordinates.current = debounce(setAbsoluteStyleCoordinates, 20);
+  }, []);
+
   // On mount, set initial position and focus if necessary
   // On unmount, remove any leftover listeners
   React.useEffect(() => {
@@ -77,10 +83,8 @@ function Select(props) {
   };
 
   const onScroll = (e) => {
-    if (!listRef.current.isSameNode(e.target)) setAbsoluteStyleCoordinates();
+    if (!listRef.current.isSameNode(e.target)) efficientSetAbsoluteStyleCoordinates.current();
   }
-
-  // const efficientSetAbsoluteStyleCoordinates = debounce(setAbsoluteStyleCoordinates, 10);
 
   const scrollIntoView = index => {
     listRef.current.scrollTop = index * listRef.current.children[0].getBoundingClientRect().height;
@@ -185,13 +189,13 @@ function Select(props) {
   const addEventListeners = () => {
     window.addEventListener('click', hideOptions, true);
     window.addEventListener('scroll', onScroll, true);
-    window.addEventListener('resize', setAbsoluteStyleCoordinates, true);
+    window.addEventListener('resize', efficientSetAbsoluteStyleCoordinates.current, true);
   };
 
   const removeEventListeners = () => {
     window.removeEventListener('click', hideOptions, true);
     window.removeEventListener('scroll', onScroll, true);
-    window.removeEventListener('resize', setAbsoluteStyleCoordinates, true);
+    window.removeEventListener('resize', efficientSetAbsoluteStyleCoordinates.current, true);
   };
 
   const {
