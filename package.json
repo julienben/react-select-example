@@ -32,14 +32,15 @@
   ],
   "dependencies": {
     "classnames": "2.2.6",
+    "lodash": "4.17.11",
     "prop-types": "15.6.2",
     "react": "16.7.0-alpha.0",
     "react-dom": "16.7.0-alpha.0",
     "react-scripts": "2.1.1"
   },
   "devDependencies": {
-    "@storybook/react": "4.0.4",
-    "@babel/core": "7.1.5",
+    "@babel/core": "7.1.6",
+    "@storybook/react": "4.0.7",
     "@storybook/storybook-deployer": "2.3.0",
     "babel-loader": "8.0.4",
     "enzyme": "3.7.0",

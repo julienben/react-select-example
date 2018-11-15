@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { debounce } from '../../utils/debounce';
+import throttle from 'lodash/throttle';
 
 import Option from './Option';
 import style from '../Select/Select.module.scss';
@@ -47,8 +47,7 @@ function Select(props) {
 
   const efficientSetAbsoluteStyleCoordinates = React.useRef();
   React.useEffect(() => {
-    // TODO: Let's use rAF, not debounce. Or throttle.
-    efficientSetAbsoluteStyleCoordinates.current = debounce(setAbsoluteStyleCoordinates, 20);
+    efficientSetAbsoluteStyleCoordinates.current = throttle(setAbsoluteStyleCoordinates, 30);
   }, []);
 
   // On mount, set initial position and focus if necessary

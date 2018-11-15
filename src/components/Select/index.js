@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { debounce } from '../../utils/debounce';
+import throttle from 'lodash/throttle';
 
 import Option from './Option';
 import style from './Select.module.scss';
@@ -53,7 +53,7 @@ class Select extends React.Component {
     });
   };
 
-  efficientSetAbsoluteStyleCoordinates = debounce(this.setAbsoluteStyleCoordinates, 10);
+  efficientSetAbsoluteStyleCoordinates = throttle(this.setAbsoluteStyleCoordinates, 30);
 
   // Show or hide the list of options
   toggleOptions = e => {
