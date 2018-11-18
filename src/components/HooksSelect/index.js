@@ -40,15 +40,16 @@ function reducer(state, action) {
   }
 }
 
+function useThrottled(func, wait = 0, options = {}) {
+  const ref = React.useRef();
+  if (!ref.current) ref.current = throttle(func, wait, options);
+  return ref.current;
+}
+
 function Select(props) {
   const [state, dispatch] = React.useReducer(reducer, getInitialState(props));
   const containerRef = React.useRef();
   const listRef = React.useRef();
-
-  const efficientSetAbsoluteStyleCoordinates = React.useRef();
-  React.useEffect(() => {
-    efficientSetAbsoluteStyleCoordinates.current = throttle(setAbsoluteStyleCoordinates, 30);
-  }, []);
 
   // On mount, set initial position and focus if necessary
   // On unmount, remove any leftover listeners
@@ -81,8 +82,10 @@ function Select(props) {
     })
   };
 
+  const efficientSetAbsoluteStyleCoordinates = useThrottled(setAbsoluteStyleCoordinates, 30);
+
   const onScroll = (e) => {
-    if (!listRef.current.isSameNode(e.target)) efficientSetAbsoluteStyleCoordinates.current();
+    if (!listRef.current.isSameNode(e.target)) efficientSetAbsoluteStyleCoordinates();
   }
 
   const scrollIntoView = index => {
@@ -188,13 +191,13 @@ function Select(props) {
   const addEventListeners = () => {
     window.addEventListener('click', hideOptions, true);
     window.addEventListener('scroll', onScroll, true);
-    window.addEventListener('resize', efficientSetAbsoluteStyleCoordinates.current, true);
+    window.addEventListener('resize', efficientSetAbsoluteStyleCoordinates, true);
   };
 
   const removeEventListeners = () => {
     window.removeEventListener('click', hideOptions, true);
     window.removeEventListener('scroll', onScroll, true);
-    window.removeEventListener('resize', efficientSetAbsoluteStyleCoordinates.current, true);
+    window.removeEventListener('resize', efficientSetAbsoluteStyleCoordinates, true);
   };
 
   const {
