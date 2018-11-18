@@ -40,11 +40,17 @@ function reducer(state, action) {
   }
 }
 
-function useThrottled(func, wait = 0, options = {}) {
-  const ref = React.useRef();
-  if (!ref.current) ref.current = throttle(func, wait, options);
-  return ref.current;
-}
+// function useThrottled(func, wait = 0, options = {}) {
+//   const ref = React.useRef();
+//   if (!ref.current) ref.current = throttle(func, wait, options);
+//   return ref.current;
+// }
+
+// function useDeclareOnce(func, args = []) {
+//   const ref = React.useRef();
+//   if (!ref.current) ref.current = func(...args);
+//   return ref.current;
+// }
 
 function Select(props) {
   const [state, dispatch] = React.useReducer(reducer, getInitialState(props));
@@ -82,7 +88,10 @@ function Select(props) {
     })
   };
 
-  const efficientSetAbsoluteStyleCoordinates = useThrottled(setAbsoluteStyleCoordinates, 30);
+  // const efficientSetAbsoluteStyleCoordinates = useThrottled(setAbsoluteStyleCoordinates, 30);
+  // const efficientSetAbsoluteStyleCoordinates = useDeclareOnce(throttle, [setAbsoluteStyleCoordinates, 30]);
+  const efficientSetAbsoluteStyleCoordinates = React.useMemo(() => throttle(setAbsoluteStyleCoordinates, 30), []);
+
 
   const onScroll = (e) => {
     if (!listRef.current.isSameNode(e.target)) efficientSetAbsoluteStyleCoordinates();
